@@ -1,0 +1,49 @@
+name: Unstable conatiner image release channel
+
+on:
+  push:
+    paths:
+      - "Dockerfile"
+      - "entrypoint.sh"
+    branches:
+      - main
+
+env:
+  IMAGE_REGISTRY: ghcr.io
+  IMAGE_DISTRIBUTION: ${{ github.repository_owner }}
+  IMAGE_NAME: packer
+  IMAGE_TAGS: latest unstable
+
+jobs:
+
+  build_and_push:
+
+      name: Push container image to GitHub Packages
+      runs-on: ubuntu-20.04
+      environment: unstable
+      
+      steps:
+
+        - name: Check out the reposiotry
+          uses: actions/checkout@v2
+          
+        - name: Build Image
+          id: build-image
+          uses: redhat-actions/buildah-build@main
+          with:
+            image: ${{ env.IMAGE_NAME }}
+            tags: ${{ env.IMAGE_TAGS }}
+            dockerfiles: |
+              ./Dockerfile
+            build-args: |
+              PACKER_HASH=sha256:93291f0b3041080b47b065b77309e5c1beee52c6bd691224d21d32e91ec9b562
+
+        - name: Push To Registry
+          id: push-to-registry
+          uses: redhat-actions/push-to-registry@main
+          with:
+            image: ${{ steps.build-image.outputs.image }}
+            tags: ${{ steps.build-image.outputs.tags }}
+            registry: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_DISTRIBUTION }}
+            username: ${{ secrets.REGISTRY_USER }}
+            password: ${{ secrets.REGISTRY_PASSWORD }}
