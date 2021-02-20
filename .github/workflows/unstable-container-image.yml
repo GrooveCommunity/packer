@@ -5,6 +5,7 @@ on:
     paths:
       - "Dockerfile"
       - "entrypoint.sh"
+      - "README.md"
     branches:
       - main
 
