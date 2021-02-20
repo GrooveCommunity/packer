@@ -10,7 +10,7 @@ on:
 
 env:
   IMAGE_REGISTRY: ghcr.io
-  IMAGE_DISTRIBUTION: ${{ github.repository_owner }}
+  IMAGE_DISTRIBUTION: groovecommunity
   IMAGE_NAME: packer
   IMAGE_TAGS: latest unstable
 
