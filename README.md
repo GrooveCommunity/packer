@@ -4,11 +4,11 @@ A wrapper container for [Hashicorp Packer](https://www.packer.io/) with no extra
 
 Through [GitHub Environments](https://docs.github.com/en/actions/reference/environments) we control our release channels as described below:
 
-- Environment **"Unstable"** used to approve releases for `latest` and `unstable` container image (and push to **official release registry**)
+- Environment **"unstable"** is used to approve releases for `latest` and `unstable` container image (and push to **official release registry**)
   - :rocket: **Deployment reviewers:**
     - [@cloyol1](https://github.com/cloyol1)
-    - [@codermarcos](https://github.com/cloyol1)
-    - [@vflopes](https://github.com/cloyol1)
+    - [@codermarcos](https://github.com/codermarcos)
+    - [@vflopes](https://github.com/vflopes)
 
 
 ----------
